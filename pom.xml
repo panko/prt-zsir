@@ -41,6 +41,15 @@
 			<version>2.4.0</version>
 		</dependency>
 	</dependencies>
+	<pluginRepositories>
+    <pluginRepository>
+        <id>oss-sonatype-snapshots</id>
+        <url>https://oss.sonatype.org/content/groups/public/</url>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </pluginRepository>
+</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -110,7 +119,7 @@
 					<plugin>
 						<groupId>com.zenjava</groupId>
 						<artifactId>javafx-maven-plugin</artifactId>
-						<version>8.8.3</version>
+						<version>9.0.0-SNAPSHOT</version>
 						<configuration>
 							<mainClass>zsir.model.Main</mainClass>
 							<vendor>ppeter</vendor>
