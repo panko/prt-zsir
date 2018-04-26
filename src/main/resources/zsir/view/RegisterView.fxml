@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zsir.view.LoginController">
+<Pane minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zsir.view.RegisterController">
    <children>
       <GridPane hgap="10.0" layoutX="241.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="311.0" vgap="10.0">
         <columnConstraints>
@@ -25,7 +25,7 @@
             <RowConstraints maxHeight="94.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zsír" textAlignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zsír - Registration" textAlignment="CENTER" wrappingWidth="207.240234375">
                <font>
                   <Font size="20.0" />
                </font>
@@ -34,8 +34,8 @@
             <Label text="Password:" GridPane.rowIndex="2" />
             <TextField fx:id="userField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="passField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="loginBtn" mnemonicParsing="false" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="regBtn" mnemonicParsing="false" onAction="#toRegView" text="Reg" GridPane.rowIndex="3" />
+            <Button fx:id="regBtn" mnemonicParsing="false" text="Register" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#toLoginView" text="Back" GridPane.rowIndex="3" />
          </children>
          <padding>
             <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />

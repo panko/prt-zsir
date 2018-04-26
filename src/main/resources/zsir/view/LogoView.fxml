@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane fx:id="rootPane" minHeight="600.0" minWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zsir.view.LogoController">
+<BorderPane fx:id="rootPane" minHeight="600.0" minWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zsir.view.LogoController">
    <center>
    <StackPane>
       <ImageView fx:id="debLogo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
