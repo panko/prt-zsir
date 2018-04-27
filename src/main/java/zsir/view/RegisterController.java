@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
+import org.hsqldb.rights.UserManager;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,7 +35,6 @@ public class RegisterController {
 	
 	public void onRegBtnClick() {
 		User user = new User(userField.getText(), passField.getText());
-		
 		user.setDate(new Date(System.currentTimeMillis()));
 		
 	}
