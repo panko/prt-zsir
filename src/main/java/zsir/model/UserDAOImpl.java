@@ -1,9 +1,24 @@
 package zsir.model;
 
+import javax.persistence.EntityManager;
+
 public class UserDAOImpl implements UserDAO {
+	
+	private EntityManager em;
+	
+	/**
+	 *Set EntityManager.
+	 *@param em EntityManager.
+	 */
+	public UserDAOImpl(EntityManager em) {
+		this.em = em;
+	}
+
 
 	public void createUser(User user) {
-		// TODO Auto-generated method stub
+		em.getTransaction().begin();
+		em.persist(user);
+		em.getTransaction().commit();
 
 	}
 

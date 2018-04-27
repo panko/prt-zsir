@@ -12,6 +12,7 @@ import zsir.view.LogoController;
  *
  */
 public class Main extends Application {
+
 	private static final String NAME = "Zsir";
 	private static final String VERSION = "1.0";
 	private static Stage stage;
@@ -36,6 +37,13 @@ public class Main extends Application {
 		getStage().setScene(scene);
 		getStage().show();
 		lc.fade();
+	}
+	
+	
+	@Override
+	public void stop() throws Exception {
+		
+		super.stop();
 	}
 
 	public static Stage getStage() {
