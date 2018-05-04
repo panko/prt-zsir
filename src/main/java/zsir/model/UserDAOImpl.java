@@ -1,6 +1,10 @@
 package zsir.model;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
 
 public class UserDAOImpl implements UserDAO {
 	
@@ -15,16 +19,23 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 
-	public void createUser(User user) {
+	public void createUser(String name, String pass) {
 		em.getTransaction().begin();
+		User user = new User(name, pass);
 		em.persist(user);
 		em.getTransaction().commit();
 
 	}
 
-	public User getUser(String name) {
-		// TODO Auto-generated method stub
-		return null;
+
+	public List<User> getUser(String name) {
+		TypedQuery<User> q = em.createQuery("SELECT u FROM ZSIRUSER u WHERE u.userName='"
+                + name + "'",User.class);
+
+		return q.getResultList();
 	}
 
+
 }
+
+

@@ -1,6 +1,8 @@
 package zsir.model;
 
+import java.util.List;
+
 public interface UserDAO {
-	public void createUser(User user);
-	public User getUser(String name);
+	public void createUser(String name, String pass);
+	public List<User> getUser(String name);
 }

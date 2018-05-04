@@ -1,7 +1,5 @@
 package zsir.model;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "USER")
-@Table(name = "USER")
+@Entity(name = "ZSIRUSER")
+@Table(name = "ZSIRUSER")
 public class User {
 	
 	@Id
@@ -24,18 +22,15 @@ public class User {
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@Column(name = "DATE_OF_REG")
-	private Date date;
-	
-	@Column(name = "SCORE")
-	private int score;
+	public User() {
+		super();
+	}
 	
 	
 	public User(String userName, String password) {
 		super();
 		this.userName = userName;
 		this.password = password;
-		this.score = 0;
 	}
 
 	public int getId() {
@@ -60,22 +55,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
 	}
 
 

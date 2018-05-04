@@ -4,16 +4,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class DatabaseManager {
-
-	private static final DatabaseManager instance = new DatabaseManager();
+public class UserDAOFactory implements AutoCloseable {
+	
+	
+	private static final UserDAOFactory instance = new UserDAOFactory();
 	private static EntityManager em = null;
 	private static EntityManagerFactory emf = null;
 	
 
-	private DatabaseManager() { }
+	private UserDAOFactory() { }
 
-	public static DatabaseManager getInstance() {
+	public static UserDAOFactory getInstance() {
 		if (emf == null) {
 			emf = Persistence.createEntityManagerFactory("dev");
 		}
@@ -26,10 +27,11 @@ public class DatabaseManager {
 	public UserDAO createDAO(){
 		return new UserDAOImpl(em);
 	}
-	
-	
-	public static void disconnect(){
+
+	public void close() throws Exception {
 		em.close();
 		emf.close();
-	} 
+		
+	}
+
 }
