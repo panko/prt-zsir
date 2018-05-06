@@ -38,7 +38,7 @@ public class RegisterController implements Initializable {
 	
 	@FXML
 	public void onBackBtnClick() throws IOException {
-		Main.getStage().setScene((new Scene( (Parent) FXMLLoader.load(getClass().getResource("../view/LoginView.fxml")))));
+		Main.getStage().setScene((new Scene( (Parent) FXMLLoader.load(getClass().getResource("/zsir/view/LoginView.fxml")))));
 	}
 	@FXML
 	public void onRegBtnClick() {

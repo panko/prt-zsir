@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import zsir.view.LogoController;
 
@@ -25,14 +24,14 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		Main.setStage(stage);
-		stage.setTitle(NAME + VERSION);
+		stage.setTitle(NAME + " " + VERSION);
 		createLogoView();
 
 	}
 
 	private void createLogoView() throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("../view/LogoView.fxml"));
+		loader.setLocation(getClass().getResource("/zsir/view/LogoView.fxml"));
 		Scene scene = new Scene((BorderPane) loader.load());
 		LogoController lc = loader.getController();
 		getStage().setScene(scene);
@@ -44,6 +43,7 @@ public class Main extends Application {
 	@Override
 	public void stop() throws Exception {
 		super.stop();
+		UserDAOFactory.getInstance().close();
 		
 	}
 

@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import zsir.model.Main;
 
@@ -36,7 +35,7 @@ public class LogoController {
 		seqT.setOnFinished(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent ae) {
             	try {
-					Main.getStage().setScene((new Scene( (Parent) FXMLLoader.load(getClass().getResource("../view/LoginView.fxml")))));
+					Main.getStage().setScene((new Scene( (Parent) FXMLLoader.load(getClass().getResource("/zsir/view/LoginView.fxml")))));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
