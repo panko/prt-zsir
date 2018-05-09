@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -15,6 +16,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<slf4j.version>1.7.25</slf4j.version>
+		<tinylog.version>1.3.4</tinylog.version>
 	</properties>
 
 	<dependencies>
@@ -27,7 +30,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.25</version>
+			<version>${slf4j.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -59,30 +62,30 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
-	<pluginRepositories>
-    <pluginRepository>
-        <id>oss-sonatype-snapshots</id>
-        <url>https://oss.sonatype.org/content/groups/public/</url>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </pluginRepository>
-</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.zenjava</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>8.8.3</version>
+				<configuration>
+					<vendor>YourCompany</vendor>
+					<mainClass>zsir.model.Main</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-			      <artifactId>maven-jar-plugin</artifactId>
-			      <version>3.0.2</version>
-			      <configuration>
-				<archive>
-				  <manifest>
-				    <addClasspath>true</addClasspath>
-				    <classpathPrefix>lib/</classpathPrefix>
-				    <mainClass>zsir.model.Main</mainClass>
-				  </manifest>
-				</archive>
-			      </configuration>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>zsir.model.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -113,38 +116,41 @@
 	</build>
 	<profiles>
 		<profile>
-			<id>jdk7</id>
+			<id>dev</id>
 			<activation>
-				<jdk>1.7</jdk>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<dependencies>
 				<dependency>
-					<groupId>com.oracle</groupId>
-					<artifactId>javafx</artifactId>
-					<version>2.2</version>
-					<scope>system</scope>
-					<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
+					<groupId>org.tinylog</groupId>
+					<artifactId>tinylog</artifactId>
+					<version>${tinylog.version}</version>
+					<scope>runtime</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.tinylog</groupId>
+					<artifactId>slf4j-binding</artifactId>
+					<version>${tinylog.version}</version>
+					<scope>runtime</scope>
 				</dependency>
 			</dependencies>
 		</profile>
 		<profile>
-			<id>jdk8-or-later</id>
-			<activation>
-				<jdk>[1.8,)</jdk>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.zenjava</groupId>
-						<artifactId>javafx-maven-plugin</artifactId>
-						<version>8.8.3</version>
-						<configuration>
-							<mainClass>zsir.model.Main</mainClass>
-							<vendor>ppeter</vendor>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
+			<id>prod</id>
+			<dependencies>
+				<dependency>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-core</artifactId>
+					<version>1.2.3</version>
+					<scope>runtime</scope>
+				</dependency>
+				<dependency>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+					<version>1.2.3</version>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
 		</profile>
 	</profiles>
 </project>

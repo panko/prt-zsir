@@ -31,12 +31,12 @@ public class Main extends Application {
 
 	private void createLogoView() throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/zsir/view/LogoView.fxml"));
+		loader.setLocation(getClass().getResource("/zsir/view/BoardView.fxml"));
 		Scene scene = new Scene((BorderPane) loader.load());
-		LogoController lc = loader.getController();
+		//LogoController lc = loader.getController();
 		getStage().setScene(scene);
 		getStage().show();
-		lc.fade();
+		//lc.fade();
 	}
 	
 	
