@@ -78,6 +78,7 @@ public class BoardController {
 			bp.getChildren().add(card);
 		}
 		game.initialize();
+		btn.setVisible(false);
 
 	}
 	

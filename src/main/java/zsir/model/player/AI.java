@@ -17,6 +17,11 @@ import zsir.model.Deck;
 import zsir.model.Game;
 
 public class AI implements Player {
+	@Override
+	public String toString() {
+		return "AI [name=" + name + ", cards=" + cards + ", history=" + history + ", game=" + game + "]";
+	}
+
 	private static Logger logger = LoggerFactory.getLogger(AI.class);
 
 	final String name = "AI";
@@ -45,6 +50,10 @@ public class AI implements Player {
 		return mine;
 	}
 	
+	public boolean doIPass() {
+		return true;
+	}
+	
 	public Card callOnly() {
 		Card mine = cards.remove(0);
 		mine.slide();
@@ -58,9 +67,9 @@ public class AI implements Player {
 	public Card call(Card c) {
 		for (Card card : cards) {
 			if(c.rank == card.rank) {
-				logger.info("AI can make trouble.");
+				logger.info("AI hit hard.");
 				cards.remove(card);
-				card.slideAndSave();
+				card.slide();
 				return card;
 			}
 		}
@@ -71,14 +80,12 @@ public class AI implements Player {
 
 	@Override
 	public void draw(Deck d) {
-		while (cards.size() < 4) {
 			Card c = d.draw();
 			c.parent = this;
 			c.flip();
 			logger.debug("AI - draw - " + c.toString());
 			cards.add(c);
 			refreshCardLayout();
-		}
 
 	}
 
@@ -103,5 +110,9 @@ public class AI implements Player {
 		}
 		game.getBc().getAiScore().setText(String.valueOf(old + addable.size()));
 		addable.clear();
+	}
+	
+	public int getNumOfCards() {
+		return cards.size();
 	}
 }

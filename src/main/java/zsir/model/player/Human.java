@@ -18,6 +18,11 @@ import zsir.model.Deck;
 import zsir.model.Game;
 
 public class Human implements Player {
+	@Override
+	public String toString() {
+		return "Human [name=" + name + ", cards=" + cards + ", history=" + history + ", game=" + game + "]";
+	}
+
 	private static Logger logger = LoggerFactory.getLogger(Human.class);
 	
 	String name;
@@ -35,7 +40,7 @@ public class Human implements Player {
 	@Override
 	public Card call(Card c) {
 		//c.slide();
-		refreshCardLayout();
+		//refreshCardLayout();
 		
 		cards.remove(c);
 		return c;
@@ -48,7 +53,6 @@ public class Human implements Player {
 	
 	@Override
 	public void draw(Deck d) {
-		while (cards.size() < 4) {
 			Card c = d.draw();
 			c.parent = this;
 			c.flip();
@@ -56,7 +60,6 @@ public class Human implements Player {
 			logger.debug("Human - draw - " + c.toString());
 			cards.add(c);
 			refreshCardLayout();
-		}
 
 
 	}
@@ -84,6 +87,9 @@ public class Human implements Player {
 		
 	}
 	
+	public int getNumOfCards() {
+		return cards.size();
+	}
 	
 
 }

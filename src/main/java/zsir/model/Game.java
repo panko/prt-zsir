@@ -77,9 +77,11 @@ public class Game {
 				currentlyOnBoard.add(ais);
 				if (isHit(c, ais)) {
 					bc.getReleaseBtn().setVisible(true);
+					setState(State.HITTED);
 				} else {
-					me.addHistory(currentlyOnBoard);
-					drawBoth();
+					bc.getReleaseBtn().setVisible(false);
+					//myWinSave();
+					return;
 				}
 			}
 			if (state == State.START) {
@@ -100,25 +102,42 @@ public class Game {
 	}
 
 	public void AIstrun() {
-		if (currentP == ai) {
-			if (state == State.CALLED) {
-				logger.debug("state == State.CALLED");
-				setState(State.START);
+
+		if (currentP == ai && state == State.CALLED) {
+			int cursize = currentlyOnBoard.size();
+			logger.debug("AI - state == State.CALLED");
+			logger.debug("curreltyonboardssize: ", cursize);
+
+			if (isHit(currentlyOnBoard.get(cursize - 2), currentlyOnBoard.get(cursize - 1))) { // if i hit the AI
+				if (ai.doIPass()) {
+					myWinSave();
+					switchPlayers();
+				} else { // ai confident
+					// TODO
+				}
+			} else {
 				aiWinSave();
+				
+				AIstrun();
 			}
-			if (state == State.HITTED) {
-				setState(State.CALLED);
-				Card ais = ai.callOnly();
-				currentlyOnBoard.add(ais);
-			}
-
-			if (state == State.START) {
-				setState(State.CALLED);
-				Card ais = ai.callOnly();
-				currentlyOnBoard.add(ais);
-			}
-
 		}
+
+		if (currentP == ai && state == State.HITTED) {
+			setState(State.CALLED);
+			Card ais = ai.callOnly();
+			currentlyOnBoard.add(ais);
+		}
+
+		if (currentP == ai && state == State.START) {
+			if(isItOver()) {
+				return;
+			}
+			
+			setState(State.CALLED);
+			Card ais = ai.callOnly();
+			currentlyOnBoard.add(ais);
+		}
+
 	}
 
 	public void isItLegal(Card c) {
@@ -131,34 +150,48 @@ public class Game {
 		} else if (currentP == ai && state == State.HITTED && isHit(currentlyOnBoard.get(0), c)) {
 			c.clickSlide();
 		} else {
-			logger.error("illegal step.");
+			
+			logger.error("illegal step. currentP=" + currentP + " state: " + state);
 		}
 
 	}
 
 	public void myWinSave() {
+		logger.debug("human wins.");
 		me.addHistory(currentlyOnBoard);
 		drawBoth();
+		setState(State.START);
 	}
 
 	public void aiWinSave() {
+		logger.debug("ai wins.");
 		ai.addHistory(currentlyOnBoard);
 		drawBoth();
+		setState(State.START);
 	}
 
 	public void switchPlayers() {
+		logger.debug("Az új meghívott: " +currentP);
 		if (currentP == me) {
 			currentP = ai;
 		} else {
 			currentP = me;
 		}
+		logger.debug("Az új meghívó: " +currentP);
 		setState(State.START);
 	}
 
 	public void drawBoth() {
-		logger.trace("BOTH DRAWED.");
-		me.draw(deck);
-		ai.draw(deck);
+		logger.trace("in  DRAW both.");
+		if(isItOver()){
+			doGameOver();
+		}
+
+		while(deck.cards.size() != 0 && me.getNumOfCards() < 4) {
+			me.draw(deck);
+			ai.draw(deck);
+		}
+		
 	}
 
 	public boolean isHit(Card hivo, Card hivott) {
@@ -180,9 +213,23 @@ public class Game {
 	public State getState() {
 		return state;
 	}
+	
+	private boolean isItOver(){
+		if(deck.cards.size() == 0 && me.getNumOfCards() == 0 && ai.getNumOfCards() == 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	private void doGameOver(){
+		logger.debug("GAME IS OVER.");
+		bc.getReleaseBtn().setVisible(false);
+		bc.getBtn().setVisible(true);
+	}
 
 	public void setState(State state) {
 		logger.info("Old state: " + this.state + " new state: " + state);
+		logger.debug("Jelenlegi meghívó: " +currentP);
 		this.state = state;
 	}
 }

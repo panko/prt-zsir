@@ -68,6 +68,7 @@ public class Card extends ImageView {
 	}
 
 	public void clickSlide() {
+		this.setMouseTransparent(true);
 		Card cardd = this;
 		TranslateTransition tt = new TranslateTransition(Duration.millis(500), this);
 		if (parent.getClass() == Human.class) {
@@ -86,6 +87,7 @@ public class Card extends ImageView {
 			}
 		});
 		st.play();
+		
 	}
 
 	public void slideAndSave() {
