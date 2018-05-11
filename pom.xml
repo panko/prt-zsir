@@ -211,13 +211,14 @@
 		<profile>
 			<id>prod</id>
 			<properties>
+			    <maven.test.skip>true</maven.test.skip>
 				<db.driver>oracle.jdbc.OracleDriver</db.driver>
 				<db.url>jdbc:oracle:thin:@db.inf.unideb.hu:1521:ora11g</db.url>
 				<db.username>progtech</db.username>
 				<db.password>progtech</db.password>
 				<db.dialect>org.hibernate.dialect.Oracle10gDialect</db.dialect>
 				<db.show_sql>true</db.show_sql>
-				<db.hbm2ddl.auto>create</db.hbm2ddl.auto>
+				<db.hbm2ddl.auto>validate</db.hbm2ddl.auto>
 			</properties>
 			<dependencies>
 				<dependency>
