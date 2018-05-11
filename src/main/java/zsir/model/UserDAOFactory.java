@@ -51,9 +51,10 @@ public class UserDAOFactory implements AutoCloseable {
 		return new UserDAOImpl(em);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.AutoCloseable#close()
-	 */
+  /**
+   * Closes the connection.
+   * @throws Exception If we can't close the connection an exception will be thrown
+   */
 	public void close() throws Exception {
 		em.close();
 		emf.close();

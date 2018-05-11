@@ -310,6 +310,11 @@ public class Card extends ImageView {
     return game;
   }
 
+  /**
+   * Sets the game.
+   * @param game
+   *          the new game
+   */
   public static void setGame(final Game game) {
     Card.game = game;
   }

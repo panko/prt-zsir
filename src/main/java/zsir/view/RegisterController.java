@@ -21,81 +21,83 @@ import zsir.model.UserValidator;
  * The Class RegisterController.
  */
 public class RegisterController implements Initializable {
-	
-	/** The user field. */
-	@FXML
-	private TextField userField;
-	
-	/** The pass field. */
-	@FXML
-	private TextField passField;
-	
-	/** The registration button. */
-	@FXML
-	private Button regBtn;
-	
-	/** The error label. */
-	@FXML
-	Label errLbl;
-	
-	/** The back button. */
-	@FXML
-	private Button backBtn;
-	
-	/** The UserDAO. */
-	private UserDAO ud;
-	
-	/**
-	 * When we click to the back button.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	@FXML
-	public void onBackBtnClick() throws IOException {
-		Main.getStage().setScene((new Scene( (Parent) FXMLLoader.load(getClass().getResource("/zsir/view/LoginView.fxml")))));
-	}
-	
-	/**
-	 * When we click on the registration button.
-	 */
-	@FXML
-	public void onRegBtnClick() {
-        UserValidator v = new UserValidator(ud);
-        
-        if (v.regValidate(userField.getText())) {           
-            ud.createUser(userField.getText(), userField.getText());
-            errLbl.setText("successful reg");
-        } else {
-        	errLbl.setText("reg failed");
-        }
-	}
 
-    /* (non-Javadoc)
-     * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-     */
-    public void initialize(URL url, ResourceBundle rb) {
-        setUd(UserDAOFactory.getInstance().createDAO());
+  /** The user field. */
+  @FXML
+  private TextField userField;
+
+  /** The pass field. */
+  @FXML
+  private TextField passField;
+
+  /** The registration button. */
+  @FXML
+  private Button regBtn;
+
+  /** The error label. */
+  @FXML
+  Label errLbl;
+
+  /** The back button. */
+  @FXML
+  private Button backBtn;
+
+  /** The UserDAO. */
+  private UserDAO ud;
+
+  /**
+   * When we click to the back button.
+   *
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   */
+  @FXML
+  public void onBackBtnClick() throws IOException {
+    Main.getStage()
+        .setScene((new Scene((Parent) FXMLLoader.load(getClass().getResource("/zsir/view/LoginView.fxml")))));
+  }
+
+  /**
+   * When we click on the registration button.
+   */
+  @FXML
+  public void onRegBtnClick() {
+    UserValidator v = new UserValidator(ud);
+
+    if (v.regValidate(userField.getText())) {
+      ud.createUser(userField.getText(), userField.getText());
+      errLbl.setText("successful reg");
+    } else {
+      errLbl.setText("reg failed");
     }
-    
-	/**
-	 * Gets the UserDAO.
-	 *
-	 * @return the ud
-	 */
-	public UserDAO getUd() {
-		return ud;
-	}
-	
-	/**
-	 * Sets the UserDAO.
-	 *
-	 * @param ud the new ud
-	 */
-	public void setUd(UserDAO ud) {
-		this.ud = ud;
-	}
-	
+  }
 
-	
+  /**
+   * Runs when the controller initialized. Sets the UserDAO.
+   * @param url The URL.
+   * @param rb The ResourceBoundle
+   */
+  public void initialize(URL url, ResourceBundle rb) {
+    setUd(UserDAOFactory.getInstance().createDAO());
+  }
+
+  /**
+   * Gets the UserDAO.
+   *
+   * @return the ud
+   */
+  public UserDAO getUd() {
+    return ud;
+  }
+
+  /**
+   * Sets the UserDAO.
+   *
+   * @param ud
+   *          the new ud
+   */
+  public void setUd(UserDAO ud) {
+    this.ud = ud;
+  }
 
 }

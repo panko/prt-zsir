@@ -15,7 +15,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 import zsir.model.Main;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LogoController.
  */

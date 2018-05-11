@@ -82,9 +82,11 @@ public class Human implements Player {
 
 	}
 	
-	/* (non-Javadoc)
-	 * @see zsir.model.player.Player#addHistory(java.util.List)
-	 */
+  /**
+   * Adds the card list to the player's history.
+   *
+   * @param addable the list of those cards that we add to our history list.
+   */
 	public void addHistory(List<Card> addable) {
 		for (Card card : addable) {
 			card.setVisible(false);

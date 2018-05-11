@@ -24,9 +24,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see zsir.model.UserDAO#createUser(java.lang.String, java.lang.String)
-	 */
+  /**
+   * Creates the user.
+   *
+   * @param name the name
+   * @param pass the password
+   */
 	public void createUser(String name, String pass) {
 		em.getTransaction().begin();
 		User user = new User(name, pass);
@@ -36,9 +39,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see zsir.model.UserDAO#getUser(java.lang.String)
-	 */
+  /**
+   * Gets the user.
+   *
+   * @param name the name
+   * @return the list of users
+   */
 	public List<User> getUser(String name) {
 		TypedQuery<User> q = em.createQuery("SELECT u FROM ZSIRUSER u WHERE u.userName='"
                 + name + "'",User.class);

@@ -75,9 +75,11 @@ public class LoginController implements Initializable {
 		
 	}
 	
-    /* (non-Javadoc)
-     * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-     */
+  /**
+   * Runs when the controller initialized. Sets the UserDAO.
+   * @param url The URL.
+   * @param rb The ResourceBoundle
+   */
     public void initialize(URL url, ResourceBundle rb) {
 
         ud = UserDAOFactory.getInstance().createDAO();
