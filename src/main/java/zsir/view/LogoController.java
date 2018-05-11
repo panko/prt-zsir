@@ -15,18 +15,30 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 import zsir.model.Main;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LogoController.
+ */
 public class LogoController {
 
+	/** The university's logo. */
 	@FXML
 	protected ImageView debLogo;
 	
+	/** My logo. */
 	@FXML
 	protected ImageView myLogo;
 
+	/** The root pane. */
 	@FXML
 	protected BorderPane rootPane;
+	
+	/** The sequential transition. */
 	SequentialTransition seqT;
 
+	/**
+	 * The whole animation.
+	 */
 	public void fade() {
 		seqT = new SequentialTransition();
 		debFade();
@@ -44,6 +56,9 @@ public class LogoController {
 		});
 	}
 	
+	/**
+	 * Universitiy of Debrecen's logo animation.
+	 */
 	private void debFade() {
 		FadeTransition ft = new FadeTransition(Duration.seconds(2), debLogo);
 		ft.setFromValue(0.0);
@@ -54,6 +69,9 @@ public class LogoController {
 		seqT.getChildren().addAll(ft, fto);
 	}
 	
+	/**
+	 * My logo's fade.
+	 */
 	private void meFade() {
 		FadeTransition ft = new FadeTransition(Duration.seconds(2), myLogo);
 		ft.setFromValue(0.0);

@@ -2,71 +2,101 @@ package zsir.model.player;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
-import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.util.Duration;
 import zsir.model.Card;
 import zsir.model.Deck;
 import zsir.model.Game;
 
+/**
+ * The AI Class, the computer.
+ * It's very barbaric yet.
+ */
 public class AI implements Player {
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "AI [name=" + name + ", cards=" + cards + ", history=" + history + ", game=" + game + "]";
 	}
 
+	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(AI.class);
 
+	/** The name. */
 	final String name = "AI";
+	
+	/** The cards. */
 	List<Card> cards;
+	
+	/** The history. */
 	List<Card> history;
+	
+	/** The game. */
 	Game game;
 
+	/**
+	 * Instantiates a new ai.
+	 *
+	 * @param game the game object
+	 */
 	public AI(Game game) {
 		cards = new ArrayList<Card>();
 		history = new ArrayList<Card>();
 		this.game = game;
 	}
 
+	/* (non-Javadoc)
+	 * @see zsir.model.player.Player#pass()
+	 */
 	@Override
 	public Card pass() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * The AI is calling a card. We remove one from her hand. And slides it.
+	 *
+	 * @return the called card
+	 */
 	public Card call() {
 		Card mine = cards.remove(0);
 		mine.slideAndSave();
-		// mine.setLayoutY(150);
-		// mine.flip();
 		logger.info("AI - call() - " + mine);
 		return mine;
 	}
 	
+	/**
+	 * Do the AI passed. We don't want to lose so it always return true.
+	 *
+	 * @return true, forever
+	 */
 	public boolean doIPass() {
 		return true;
 	}
 	
+	/**
+	 * Call only. We don't save the game with the slide of the card.
+	 *
+	 * @return the card
+	 */
 	public Card callOnly() {
 		Card mine = cards.remove(0);
 		mine.slide();
-		// mine.setLayoutY(150);
-		// mine.flip();
 		logger.info("AI - callOnly() - " + mine);
 		return mine;
 	}
 
+	/* (non-Javadoc)
+	 * @see zsir.model.player.Player#call(zsir.model.Card)
+	 */
 	@Override
 	public Card call(Card c) {
 		for (Card card : cards) {
-			if(c.rank == card.rank) {
+			if(c.getRank() == card.getRank()) {
 				logger.info("AI hit hard.");
 				cards.remove(card);
 				card.slide();
@@ -78,6 +108,9 @@ public class AI implements Player {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see zsir.model.player.Player#draw(zsir.model.Deck)
+	 */
 	@Override
 	public void draw(Deck d) {
 			Card c = d.draw();
@@ -89,6 +122,9 @@ public class AI implements Player {
 
 	}
 
+	/**
+	 * Refreshes card layout.
+	 */
 	private void refreshCardLayout() {
 		for (Card card : cards) {
 			card.setLayoutX(200 + cards.indexOf(card) * 100);
@@ -97,6 +133,9 @@ public class AI implements Player {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see zsir.model.player.Player#addHistory(java.util.List)
+	 */
 	public void addHistory(List<Card> addable) {
 		for (Card card : addable) {
 			card.setVisible(false);
@@ -112,6 +151,11 @@ public class AI implements Player {
 		addable.clear();
 	}
 	
+	/**
+	 * Gets the number of the AI's card.
+	 *
+	 * @return the num of cards
+	 */
 	public int getNumOfCards() {
 		return cards.size();
 	}

@@ -1,35 +1,46 @@
 package zsir.model.player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
-import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.util.Duration;
 import zsir.model.Card;
 import zsir.model.Deck;
 import zsir.model.Game;
 
+/**
+ * The Human Class.
+ */
 public class Human implements Player {
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Human [name=" + name + ", cards=" + cards + ", history=" + history + ", game=" + game + "]";
 	}
 
+	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(Human.class);
 	
+	/** The name. */
 	String name;
+	
+	/** The cards. */
 	private List<Card> cards;
+	
+	/** The history of cards. */
 	private List<Card> history;
+	
+	/** The game object. */
 	Game game;
 	
+	/**
+	 * Instantiates a new human.
+	 *
+	 * @param game the game
+	 */
 	public Human(Game game) {
 		cards = new ArrayList<Card>();
 		history = new ArrayList<Card>();
@@ -37,20 +48,27 @@ public class Human implements Player {
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see zsir.model.player.Player#call(zsir.model.Card)
+	 */
 	@Override
 	public Card call(Card c) {
-		//c.slide();
-		//refreshCardLayout();
-		
 		cards.remove(c);
 		return c;
 	}
+	
+	/* (non-Javadoc)
+	 * @see zsir.model.player.Player#pass()
+	 */
 	@Override
 	public Card pass() {
 		return null;
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see zsir.model.player.Player#draw(zsir.model.Deck)
+	 */
 	@Override
 	public void draw(Deck d) {
 			Card c = d.draw();
@@ -64,6 +82,9 @@ public class Human implements Player {
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see zsir.model.player.Player#addHistory(java.util.List)
+	 */
 	public void addHistory(List<Card> addable) {
 		for (Card card : addable) {
 			card.setVisible(false);
@@ -79,6 +100,10 @@ public class Human implements Player {
 		addable.clear();
 	}
 	
+	/**
+	 * Refreshes the card layout.
+	 * Warning: It does NOT sort them, just puts them to the right place.
+	 */
 	private void refreshCardLayout() {
 		for (Card card : cards) {
 			card.setLayoutX(200 + cards.indexOf(card) * 100);
@@ -87,6 +112,11 @@ public class Human implements Player {
 		
 	}
 	
+	/**
+	 * Gets the number of the player's card.
+	 *
+	 * @return the num of cards
+	 */
 	public int getNumOfCards() {
 		return cards.size();
 	}

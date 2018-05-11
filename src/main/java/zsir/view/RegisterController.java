@@ -17,29 +17,47 @@ import zsir.model.UserDAO;
 import zsir.model.UserDAOFactory;
 import zsir.model.UserValidator;
 
+/**
+ * The Class RegisterController.
+ */
 public class RegisterController implements Initializable {
 	
+	/** The user field. */
 	@FXML
 	private TextField userField;
 	
+	/** The pass field. */
 	@FXML
 	private TextField passField;
 	
+	/** The registration button. */
 	@FXML
 	private Button regBtn;
 	
+	/** The error label. */
 	@FXML
 	Label errLbl;
 	
+	/** The back button. */
 	@FXML
 	private Button backBtn;
 	
+	/** The UserDAO. */
 	private UserDAO ud;
 	
+	/**
+	 * When we click to the back button.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@FXML
 	public void onBackBtnClick() throws IOException {
 		Main.getStage().setScene((new Scene( (Parent) FXMLLoader.load(getClass().getResource("/zsir/view/LoginView.fxml")))));
 	}
+	
+	/**
+	 * When we click on the registration button.
+	 */
 	@FXML
 	public void onRegBtnClick() {
         UserValidator v = new UserValidator(ud);
@@ -52,13 +70,27 @@ public class RegisterController implements Initializable {
         }
 	}
 
+    /* (non-Javadoc)
+     * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+     */
     public void initialize(URL url, ResourceBundle rb) {
         setUd(UserDAOFactory.getInstance().createDAO());
     }
     
+	/**
+	 * Gets the UserDAO.
+	 *
+	 * @return the ud
+	 */
 	public UserDAO getUd() {
 		return ud;
 	}
+	
+	/**
+	 * Sets the UserDAO.
+	 *
+	 * @param ud the new ud
+	 */
 	public void setUd(UserDAO ud) {
 		this.ud = ud;
 	}
