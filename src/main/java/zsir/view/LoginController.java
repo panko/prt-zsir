@@ -49,7 +49,7 @@ public class LoginController implements Initializable {
             UserValidator v = new UserValidator(ud);   
             
             if (v.loginValidate(userField.getText(), passField.getText())) {
-            	Main.getStage().setScene((new Scene( (Parent) FXMLLoader.load(getClass().getResource("/zsir/view/GameView.fxml")))));
+            	Main.getStage().setScene((new Scene( (Parent) FXMLLoader.load(getClass().getResource("/zsir/view/BoardView.fxml")))));
             } else {
                 errLbl.setText("A belépés sikertelen!");
             }

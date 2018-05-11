@@ -16,10 +16,11 @@ public class UserDAOFactory implements AutoCloseable {
 
 	public static UserDAOFactory getInstance() {
 		if (emf == null) {
-			emf = Persistence.createEntityManagerFactory("dev");
+			emf = Persistence.createEntityManagerFactory("my-little-database");
 		}
 		if (em == null) {
 			em = emf.createEntityManager();
+			//em.createNativeQuery("CREATE SEQUENCE ID_SEQ");
 		}
 		return instance;
 	}

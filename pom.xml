@@ -3,23 +3,42 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>prt.ppeter.zsir</groupId>
 	<artifactId>prt-zsir</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
+	<version>1.0</version>
 	<name>prt-zsir</name>
-	<url>http://maven.apache.org</url>
-
+	<description>The traditional zsirozas (or sedma) game in JavaFX.</description>
+	<developers>
+		<developer>
+			<id>prike</id>
+			<name>Pankó Péter</name>
+			<email>prike18@gmail.com</email>
+		</developer>
+	</developers>
+	<inceptionYear>2018</inceptionYear>
+	<organization>
+		<name>University of Debrecen</name>
+	</organization>
+	<licenses>
+		<license>
+			<name>MIT-License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/prike/prt-zsir</url>
+		<connection>scm:git:https://github.com/prike/prt-zsir.git</connection>
+		<developerConnection>scm:git:git@github.com:prike/prt-zsir.git</developerConnection>
+	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<mainClass>zsir.model.Main</mainClass>
 		<slf4j.version>1.7.25</slf4j.version>
 		<tinylog.version>1.3.4</tinylog.version>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -32,16 +51,6 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>2.4.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>sqltool</artifactId>
-			<version>2.4.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -63,14 +72,20 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<resources>
+        	<resource>
+            	<directory>src/main/resources</directory>
+            	<filtering>true</filtering>
+        	</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>com.zenjava</groupId>
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>8.8.3</version>
 				<configuration>
-					<vendor>YourCompany</vendor>
-					<mainClass>zsir.model.Main</mainClass>
+					<vendor>prike</vendor>
+					<mainClass>${mainClass}</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -82,7 +97,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>zsir.model.Main</mainClass>
+							<mainClass></mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -99,8 +114,8 @@
 						<configuration>
 							<rules>
 								<requireJavaVersion>
-									<version>[1.7,)</version>
-									<message>JDK 7 or later is required!</message>
+									<version>[1.8,)</version>
+									<message>JDK 8 or later is required!</message>
 								</requireJavaVersion>
 								<requireProperty>
 									<property>java.vendor</property>
@@ -120,7 +135,21 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			<properties>
+				<db.driver>org.hsqldb.jdbcDriver</db.driver>
+			 	<db.url>jdbc:hsqldb:mem:dev</db.url>
+				<db.username>SA</db.username>
+				<db.password></db.password>
+				<db.dialect>org.hibernate.dialect.HSQLDialect</db.dialect>
+				<db.show_sql>true</db.show_sql>
+				<db.hbm2ddl.auto>update</db.hbm2ddl.auto>
+			</properties>
 			<dependencies>
+				<dependency>
+					<groupId>org.hsqldb</groupId>
+					<artifactId>hsqldb</artifactId>
+					<version>2.4.0</version>
+				</dependency>
 				<dependency>
 					<groupId>org.tinylog</groupId>
 					<artifactId>tinylog</artifactId>
@@ -137,7 +166,21 @@
 		</profile>
 		<profile>
 			<id>prod</id>
+			 <properties>
+				<db.driver>oracle.jdbc.OracleDriver</db.driver>
+			 	<db.url>jdbc:oracle:thin:@db.inf.unideb.hu:1521:ora11g</db.url>
+				<db.username>progtech</db.username>
+				<db.password>progtech</db.password>
+				<db.dialect>org.hibernate.dialect.Oracle10gDialect</db.dialect>
+				<db.show_sql>true</db.show_sql>
+				<db.hbm2ddl.auto>create</db.hbm2ddl.auto>
+			</properties>
 			<dependencies>
+				<dependency>
+					<groupId>com.oracle</groupId>
+					<artifactId>ojdbc6</artifactId>
+					<version>11.2.0.3</version>
+				</dependency>
 				<dependency>
 					<groupId>ch.qos.logback</groupId>
 					<artifactId>logback-core</artifactId>
