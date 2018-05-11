@@ -72,7 +72,7 @@ public class Human implements Player {
 	@Override
 	public void draw(Deck d) {
 			Card c = d.draw();
-			c.parent = this;
+			c.setCardParent(this);
 			c.flip();
 			c.setOnMouseClicked(event -> game.isItLegal(c));
 			logger.debug("Human - draw - " + c.toString());

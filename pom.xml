@@ -43,7 +43,13 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testfx</groupId>
+			<artifactId>testfx-junit</artifactId>
+			<version>4.0.13-alpha</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -73,10 +79,10 @@
 	</dependencies>
 	<build>
 		<resources>
-        	<resource>
-            	<directory>src/main/resources</directory>
-            	<filtering>true</filtering>
-        	</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
 		</resources>
 		<plugins>
 			<plugin>
@@ -97,7 +103,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass></mainClass>
+							<mainClass />
 						</manifest>
 					</archive>
 				</configuration>
@@ -128,6 +134,20 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>com.atlassian.maven.plugins</groupId>
+				<artifactId>clover-maven-plugin</artifactId>
+				<version>4.1.2</version>
+				<configuration />
+				<executions>
+					<execution>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>instrument</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<profiles>
@@ -138,9 +158,9 @@
 			</activation>
 			<properties>
 				<db.driver>org.hsqldb.jdbcDriver</db.driver>
-			 	<db.url>jdbc:hsqldb:mem:dev</db.url>
+				<db.url>jdbc:hsqldb:mem:dev</db.url>
 				<db.username>SA</db.username>
-				<db.password></db.password>
+				<db.password />
 				<db.dialect>org.hibernate.dialect.HSQLDialect</db.dialect>
 				<db.show_sql>true</db.show_sql>
 				<db.hbm2ddl.auto>update</db.hbm2ddl.auto>
@@ -167,9 +187,9 @@
 		</profile>
 		<profile>
 			<id>prod</id>
-			 <properties>
+			<properties>
 				<db.driver>oracle.jdbc.OracleDriver</db.driver>
-			 	<db.url>jdbc:oracle:thin:@db.inf.unideb.hu:1521:ora11g</db.url>
+				<db.url>jdbc:oracle:thin:@db.inf.unideb.hu:1521:ora11g</db.url>
 				<db.username>progtech</db.username>
 				<db.password>progtech</db.password>
 				<db.dialect>org.hibernate.dialect.Oracle10gDialect</db.dialect>
@@ -218,12 +238,23 @@
 				<version>2.5</version>
 			</plugin>
 			<plugin>
-			  <groupId>org.jacoco</groupId>
-			  <artifactId>jacoco-maven-plugin</artifactId>
-			  <version>0.8.1</version>
+				<groupId>org.openclover</groupId>
+				<artifactId>clover-maven-plugin</artifactId>
+				<version>4.2.1</version>
 			</plugin>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.0</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
 		</plugins>
 	</reporting>
-	
+
 </project>

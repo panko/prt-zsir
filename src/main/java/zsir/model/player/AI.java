@@ -104,8 +104,6 @@ public class AI implements Player {
 			}
 		}
 		return call();
-		
-		
 	}
 
 	/* (non-Javadoc)
@@ -114,7 +112,7 @@ public class AI implements Player {
 	@Override
 	public void draw(Deck d) {
 			Card c = d.draw();
-			c.parent = this;
+			c.setCardParent(this);
 			c.flip();
 			logger.debug("AI - draw - " + c.toString());
 			cards.add(c);
