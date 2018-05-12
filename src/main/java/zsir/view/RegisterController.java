@@ -65,7 +65,7 @@ public class RegisterController implements Initializable {
     UserValidator v = new UserValidator(ud);
 
     if (v.regValidate(userField.getText())) {
-      ud.createUser(userField.getText(), userField.getText());
+      ud.createUser(userField.getText(), passField.getText());
       errLbl.setText("successful reg");
     } else {
       errLbl.setText("reg failed");
