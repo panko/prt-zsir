@@ -1,5 +1,8 @@
 package zsir.view;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,11 +10,14 @@ import javafx.scene.layout.BorderPane;
 import zsir.model.Game;
 import zsir.model.player.Player;
 import zsir.model.Card;
+import zsir.model.Deck;
 
 /**
  * The Controller of the board.
  */
 public class BoardController {
+  
+  private static Logger logger = LoggerFactory.getLogger(BoardController.class);
 
 	/**
 	 * Gets the ai score.
@@ -93,7 +99,7 @@ public class BoardController {
 	 */
 	@FXML
 	private void onClickBtn() {
-		System.out.println("in onClickBtn.");
+	  logger.debug("in onClickBtn.");
 		game = new Game(this);
 		BorderPane bp = (BorderPane) btn.getParent().getParent();
 		for (Card card : game.getDeck().getCards()) {

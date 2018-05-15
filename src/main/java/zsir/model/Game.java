@@ -93,7 +93,7 @@ public class Game {
     currentlyOnBoard = new ArrayList<Card>();
     this.bc = bc;
     setState(State.START);
-    System.out.println("In Game().initialize");
+    logger.debug("In Game().initialize");
     deck = new Deck(this);
     me = new Human(this);
     ai = new AI(this);
