@@ -64,6 +64,7 @@ public class AI implements Player {
 	 */
 	public Card call() {
 		Card mine = cards.remove(0);
+		mine.flip();
 		mine.slideAndSave();
 		logger.info("AI - call() - " + mine);
 		return mine;
@@ -85,6 +86,7 @@ public class AI implements Player {
 	 */
 	public Card callOnly() {
 		Card mine = cards.remove(0);
+		mine.flip();
 		mine.slide();
 		logger.info("AI - callOnly() - " + mine);
 		return mine;
@@ -99,6 +101,7 @@ public class AI implements Player {
 			if(c.getRank() == card.getRank()) {
 				logger.info("AI hit hard.");
 				cards.remove(card);
+				card.flip();
 				card.slide();
 				return card;
 			}
@@ -113,7 +116,7 @@ public class AI implements Player {
 	public void draw(Deck d) {
 			Card c = d.draw();
 			c.setCardParent(this);
-			c.flip();
+			//c.flip();
 			logger.debug("AI - draw - " + c.toString());
 			cards.add(c);
 			refreshCardLayout();

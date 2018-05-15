@@ -34,10 +34,7 @@ public class UserValidatorTest {
 		assertFalse("can we login with BAD name/pass?", uv.loginValidate("bela", "nemjelszo"));
 	}
 	
-	@Test
-	public void canWeLoginTest() {
-		assertTrue("can we login with good name/pass?", uv.loginValidate("aranka", "jelszo"));
-	}
+
 	
 
 }
