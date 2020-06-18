@@ -29,3 +29,4 @@ hs_err_pid*
 # mine again
 /target/
 /doc/
+.DS_Store
