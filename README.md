@@ -1,6 +1,8 @@
 # Zsír kártyajáték
 
+A közismert Zsír kártyajáték Java megvalósítása, JavaFX-el, Hibernate-el, HSQLDB-vel JDBC-sen. A "Programtervezési technológiák" nevū tárgyam feléves gyakorlati munkája.
 
+### A játékról
 A zsírozás (más néven hetes) egyszerű kártyajáték, ketten vagy négyen játszhatják magyar kártyával. A játék célja, hogy minél több „zsír” kártyát (ászt vagy tízest) gyűjtsünk össze az ütéseinkkel a játék során. A játékban nincs aduszín, és a lapoknak sincs pontértékére, rangsora.
 
 ### Funkciók
@@ -15,6 +17,10 @@ Egy kihívott lapot többször is meg lehet ütni. Ha például a kezdő játék
 Aki az ütést vitte, az hívhat újra.
 
 A győztes az lesz, aki a legtöbb ászt és tízest nyerte el a játszma során. Két játékos esetén ez minimum öt lapot jelent. Egyenlőség esetén az nyer, aki utoljára ütött. Aki a játék során egyszer sem tudott ütni, az „kopasz” marad. 
+
+### Képernyõfotók
+<img width="800" alt="Screenshot 2020-06-18 at 13 39 02" src="https://user-images.githubusercontent.com/1569515/85016960-fe573800-b16a-11ea-938c-e59f42c9cdde.png">
+<img width="829" alt="Screenshot 2020-06-18 at 13 38 04" src="https://user-images.githubusercontent.com/1569515/85016967-00b99200-b16b-11ea-85b0-b00f16e27c23.png">
 
 Licenc
 ----
