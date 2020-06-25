@@ -5,6 +5,9 @@ A közismert Zsír kártyajáték Java megvalósítása, MAVEN-el, JavaFX-el, Hi
 ### A játékról
 A zsírozás (más néven hetes) egyszerű kártyajáték, ketten vagy négyen játszhatják magyar kártyával. A játék célja, hogy minél több „zsír” kártyát (ászt vagy tízest) gyűjtsünk össze az ütéseinkkel a játék során. A játékban nincs aduszín, és a lapoknak sincs pontértékére, rangsora.
 
+### Futtatás
+```$ mvn javafx:run```
+
 ### Funkciók
   - Regisztráció 
   - Csak regisztrált felhasználók léphetnek be
